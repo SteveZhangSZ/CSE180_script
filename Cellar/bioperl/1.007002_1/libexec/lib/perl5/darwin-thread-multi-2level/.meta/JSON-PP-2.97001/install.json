@@ -1,0 +1,1 @@
+{"version":"2.97001","target":"JSON::PP","name":"JSON::PP","provides":{"JSON::PP::Boolean":{"file":"lib/JSON/PP/Boolean.pm","version":"2.97001"},"JSON::PP":{"version":"2.97001","file":"lib/JSON/PP.pm"},"JSON::PP::IncrParser":{"file":"lib/JSON/PP.pm","version":"2.97001"}},"pathname":"I/IS/ISHIGAKI/JSON-PP-2.97001.tar.gz","dist":"JSON-PP-2.97001"}

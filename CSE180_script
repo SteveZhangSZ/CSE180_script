@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+
+echo "First, input the whole genome sequencing file in FASTQ format."
+read WGS
+echo "Then, input the RNA-SEQ file corresponding to the same bacterial species in FASTQ format. "
+read Seq
+
+python SPAdes-3.13.0-Darwin/bin/spades.py -o WGS_SPAdes_output -s $WGS &&
+
+Cellar/prokka/1.13/bin/prokka --prefix scaffolds_from_WGS './WGS_SPAdes_output/scaffolds.fasta' &&
+
+subread-1.6.3-source/bin/subread-buildindex -o SPAdes_scaffolds './WGS_SPAdes_output/scaffolds.fasta' &&
+
+subread-1.6.3-source/bin/subread-align -i SPAdes_scaffolds -r $Seq -t 0 -o subread_results_counts.bam &&
+
+gffread-0.10.8/gffread/gffread './scaffolds_from_WGS/scaffolds_from_WGS.gff' -T -o PROKKA_GTF.gtf &&
+
+python withGene_id.py &&
+
+
+
+subread-1.6.3-source/bin/featureCounts -a './KnownGenesProkka.gtf' -o featureCountsSummary -t 'transcript' './subread_results_counts.bam' &&
+
+cat featureCountsSummary | cut -f 1,7 | sort -k 2,2 -n -r | head

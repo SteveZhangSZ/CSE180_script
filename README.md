@@ -1,6 +1,7 @@
 # CSE180_script
 
 ## How to use
+Run ./CSE180_script
 
 The script will prompt you to first enter the file path of the whole genome sequencing FASTQ file, then prompt you to enter the corresponding RNA-seq FASTQ file of the same species.
 
